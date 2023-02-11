@@ -94,9 +94,10 @@ in
         systemd = mkMerge (map (p: p._systemd) (attrValues cfg.projects));
       }
       (mkIf (cfg.backend == "podman-socket") {
-        virtualisation.docker.enable = false;
+        # virtualisation.docker.enable = false;
         virtualisation.podman.enable = true;
         virtualisation.podman.dockerSocket.enable = true;
+        virtualisation.podman.defaultNetwork.dnsname.enable = true;
         # virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
 
         virtualisation.arion.docker.client.package = pkgs.docker-client;
